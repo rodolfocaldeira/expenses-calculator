@@ -1,0 +1,30 @@
+<!doctype html>
+<html ng-app='App'>
+<head>
+    <meta charset=utf-8>
+    <title>Expenses Calculator</title>
+
+    <link rel="stylesheet" href="css/main.css"/>
+
+    <!--<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.6/angular.min.js"></script>-->
+    <script>window.angular || document.write('<script src="js/vendor/angular.js">\x3C/script>')</script>
+
+    <script type="text/javascript" src="js/vendor/angular-sanitize.js"></script>
+    <script type="text/javascript" src="js/controllers.js"></script>
+
+</head>
+<body ng-controller="ExpensesCalculatorCtrl">
+
+    <ul>
+        <li ng-repeat='expense in expenses'
+            ng-bind-html="expense | expenseFilter">
+
+        </li>
+    </ul>
+
+    <form ng-submit="addItem(item)">
+        <input type="text" ng-model="item" />
+    </form>
+
+</body>
+</html>
