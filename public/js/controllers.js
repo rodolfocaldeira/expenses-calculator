@@ -1,25 +1,27 @@
 var app = angular.module('App', ['ngSanitize']);
 
 app.filter('expenseFilter', function($filter) {
-    return function (expense, index) {
+    return function (expense) {
 
         var currencyFilter = $filter('currency');
         var amount = currencyFilter(expense.amount, "€");
 
         if(expense.operation === '=') {
-            return '<span class="amount total">' + amount +'</span>';
-        }
-
-        if(expense.operation === '/=') {
-            return '<span class="amount total-split">' + amount +'</span>';
+            return '<div class="total">' +
+                '<span class="description">' + expense.description + '</span> '
+                + '<span class="amount">' + amount + '</span>'
+                + '</div>';
         }
 
         if(expense.operation === '/') {
-            return '<span class="amount">' + expense.amount +'</span>';
+            return '<div class="split">' +
+                '<span class="description">' + expense.description + '</span> '
+                + '<span class="amount">' + amount + '</span>'
+                + '</div>';
         }
 
-        return '<span class="amount">' + amount + '</span> '
-            + '<span class="description">' + expense.description + '</span>';
+        return '<span class="description">' + expense.description + '</span> '
+            + '<span class="amount">' + amount + '</span>';
     }
 });
 
@@ -51,7 +53,7 @@ function ExpensesCalculatorCtrl($scope) {
                 total += expense.amount;
             }
             else if (expense.operation === '/') {
-                total = total / expense.amount;
+                total = total / expense.split;
             }
         }
 
@@ -65,6 +67,8 @@ function ExpensesCalculatorCtrl($scope) {
         }
 
         var match = item.match(regex);
+        var len;
+
 
         if (match[0] === '=') {
             $scope.expenses.push({
@@ -79,14 +83,11 @@ function ExpensesCalculatorCtrl($scope) {
         if (match[1] === '/') {
             $scope.expenses.push({
                 operation: '/',
-                amount: match[2],
-                description: 'Split'
+                split: match[2],
+                description: 'Split by ' + match[2]
             });
-            $scope.expenses.push({
-                operation: '/=',
-                amount: calculateTotal(),
-                description: 'Total'
-            });
+            len = $scope.expenses.length - 1;
+            $scope.expenses[len].amount = calculateTotal();
             $scope.item = '';
             return;
         }
