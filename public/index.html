@@ -4,9 +4,9 @@
     <meta charset=utf-8>
     <title>Expenses Calculator</title>
 
+    <link href='http://fonts.googleapis.com/css?family=Shadows+Into+Light+Two' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="css/main.css"/>
 
-    <!--<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.6/angular.min.js"></script>-->
     <script>window.angular || document.write('<script src="js/vendor/angular.js">\x3C/script>')</script>
 
     <script type="text/javascript" src="js/vendor/angular-sanitize.js"></script>
@@ -15,16 +15,32 @@
 </head>
 <body ng-controller="ExpensesCalculatorCtrl">
 
-    <ul>
-        <li ng-repeat='expense in expenses'
-            ng-bind-html="expense | expenseFilter">
+    <div class="container">
 
-        </li>
-    </ul>
+        <h1>Expenses Calculator</h1>
 
-    <form ng-submit="addItem(item)">
-        <input type="text" ng-model="item" />
-    </form>
+        <ul class="expenses">
+            <li class="expense" ng-repeat='expense in expenses'
+                ng-bind-html="expense | expenseFilter:$index"
+                    ng-click="removeItem($index)">
+
+            </li>
+        </ul>
+
+        <form ng-submit="addItem(item)">
+            <input type="text" ng-model="item" placeholder="15.50 Noodles" autofocus="autofocus"/>
+        </form>
+
+    </div>
+
+    <footer>
+        <p>
+            Built with <a href="http://angularjs.org/">AngularJs</a>,
+            source code available on <a href="https://github.com/rodolfocaldeira/expenses-calculator">GitHub</a>.
+        </p>
+
+        <p>Heavily inspired by <a href="http://hex.colorrrs.com/">hex.colorrrs.com</a>.</p>
+    </footer>
 
 </body>
 </html>

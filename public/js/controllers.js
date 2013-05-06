@@ -1,38 +1,36 @@
-//angular.module('app', ['app.filters']);
-
 var app = angular.module('App', ['ngSanitize']);
 
 app.filter('expenseFilter', function($filter) {
-    return function (expense) {
+    return function (expense, index) {
+
         var currencyFilter = $filter('currency');
         var amount = currencyFilter(expense.amount, "€");
 
         if(expense.operation === '=') {
-            return '<div class="hr--top">' + amount +'</div>';
+            return '<span class="amount total">' + amount +'</span>';
+        }
+
+        if(expense.operation === '/=') {
+            return '<span class="amount total-split">' + amount +'</span>';
         }
 
         if(expense.operation === '/') {
-            return '<div class="hr--bottom"> /' + expense.amount +'</div>';
+            return '<span class="amount">' + expense.amount +'</span>';
         }
 
-        return '<span>' + amount + '</span> '
-            + '<span>' + expense.description + '</span>';
+        return '<span class="amount">' + amount + '</span> '
+            + '<span class="description">' + expense.description + '</span>';
     }
 });
 
 function ExpensesCalculatorCtrl($scope) {
 
     $scope.expenses = [
-        {
-            operation: '+',
-            description: 'Spar',
-            amount: 1.00
-        },
-        {
-            operation: '+',
-            description: 'Spar',
-            amount: 5.00
-        }
+//        {
+//            operation: '+',
+//            description: 'Cinema',
+//            amount: 22.00
+//        }
     ];
 
     $scope.total = 0;
@@ -82,10 +80,10 @@ function ExpensesCalculatorCtrl($scope) {
             $scope.expenses.push({
                 operation: '/',
                 amount: match[2],
-                description: 'Racha'
+                description: 'Split'
             });
             $scope.expenses.push({
-                operation: '=',
+                operation: '/=',
                 amount: calculateTotal(),
                 description: 'Total'
             });
@@ -100,7 +98,11 @@ function ExpensesCalculatorCtrl($scope) {
         })
 
         $scope.item = '';
+    }
 
+    $scope.removeItem = function(index) {
+        console.log(index);
+        $scope.expenses.splice(index, 1);
     }
 
 
