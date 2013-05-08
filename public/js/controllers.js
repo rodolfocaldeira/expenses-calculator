@@ -35,11 +35,9 @@ function ExpensesCalculatorCtrl($scope) {
 //        }
     ];
 
-    $scope.total = 0;
 
-
-    // http://rubular.com/r/lIcebOkzEa
-    var regex = /([+|-|\/|\*|=])*\s*(\d*.\d*)\s*(.*)/;
+    // http://rubular.com/r/LYmqVQSrWH
+    var regex = /(\+|\-|\/|\*|=)?\s?(\d*\.?\d+)?(.*)/;
 
     function calculateTotal() {
         var total = 0;
@@ -58,7 +56,14 @@ function ExpensesCalculatorCtrl($scope) {
         }
 
         return total;
-    };
+    }
+
+    function getPositiveOrNegativeAmount(amount, operation) {
+        if(operation === '+') {
+            return +amount;
+        }
+        return -amount;
+    }
 
     $scope.addItem = function (item) {
 
@@ -67,23 +72,23 @@ function ExpensesCalculatorCtrl($scope) {
         }
 
         var match = item.match(regex);
+        var operation = match[1] || '+';
         var len;
 
-
-        if (match[0] === '=') {
+        if (operation === '=') {
             $scope.expenses.push({
-                operation: '=',
+                operation: operation,
                 amount: calculateTotal(),
                 description: 'Total'
-            })
+            });
             $scope.item = '';
             return;
         }
 
-        if (match[1] === '/') {
+        if (operation === '/') {
             $scope.expenses.push({
-                operation: '/',
-                split: match[2],
+                operation: operation,
+                split: +match[2],
                 description: 'Split by ' + match[2]
             });
             len = $scope.expenses.length - 1;
@@ -93,13 +98,13 @@ function ExpensesCalculatorCtrl($scope) {
         }
 
         $scope.expenses.push({
-            operation: match[1] || '+',
-            amount: +match[2],
+            operation: operation,
+            amount: getPositiveOrNegativeAmount(match[2], operation),
             description: match[3] || ''
-        })
-
+        });
         $scope.item = '';
     }
+
 
     $scope.removeItem = function(index) {
         console.log(index);
