@@ -37,7 +37,9 @@ function ExpensesCalculatorCtrl($scope) {
 
 
     // http://rubular.com/r/LYmqVQSrWH
-    var regex = /(\+|\-|\/|\*|=)?\s?(\d*\.?\d+)?(.*)/;
+
+//    var regex = /(\+|\-|\/|\*|=)?\s?(\d*\.?\d+)?(.*)/;
+    var regex = /(\+|\-|\/|\*|=|x)?\s?(\d*\.?\d+)?(.*)/;
 
     function calculateTotal() {
         var total = 0;
@@ -49,6 +51,9 @@ function ExpensesCalculatorCtrl($scope) {
             expense = $scope.expenses[i];
             if (expense.operation === '+' || expense.operation === '-') {
                 total += expense.amount;
+            }
+            else if (expense.operation === '*') {
+                total = total * expense.times;
             }
             else if (expense.operation === '/') {
                 total = total / expense.split;
@@ -90,6 +95,18 @@ function ExpensesCalculatorCtrl($scope) {
                 operation: operation,
                 split: +match[2],
                 description: 'Split by ' + match[2]
+            });
+            len = $scope.expenses.length - 1;
+            $scope.expenses[len].amount = calculateTotal();
+            $scope.item = '';
+            return;
+        }
+
+        if (operation === '*' || operation.toLowerCase() === 'x') {
+            $scope.expenses.push({
+                operation: '*',
+                times: +match[2],
+                description: 'Times ' + match[2]
             });
             len = $scope.expenses.length - 1;
             $scope.expenses[len].amount = calculateTotal();
