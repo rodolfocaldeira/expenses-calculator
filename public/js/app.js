@@ -1,5 +1,7 @@
 var app = angular.module('App', ['ngSanitize']);
 
+
+
 app.filter('expenseFilter', function($filter) {
     return function (expense) {
 
@@ -119,3 +121,5 @@ function ExpensesCalculatorCtrl($scope) {
 
 
 }
+
+app.controller('ExpensesCalculatorCtrl', ExpensesCalculatorCtrl);
