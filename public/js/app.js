@@ -27,20 +27,9 @@ app.filter('expenseFilter', function($filter) {
 
 function ExpensesCalculatorCtrl($scope) {
 
-    $scope.expenses = [
-//        {
-//            operation: '+',
-//            description: 'Cinema',
-//            amount: 22.00
-//        }
-    ];
+    $scope.expenses = [];
 
-
-    // http://rubular.com/r/LYmqVQSrWH
-
-//    var regex = /(\+|\-|\/|\*|=)?\s?(\d*\.?\d+)?(.*)/;
     var regex = /(\+|\-|\/|\*|=|x)?\s?(\d*\.?\d+)?(.*)/;
-
     function calculateTotal() {
         var total = 0;
         var expense;
@@ -120,7 +109,7 @@ function ExpensesCalculatorCtrl($scope) {
             description: match[3] || ''
         });
         $scope.item = '';
-    }
+    };
 
 
     $scope.removeItem = function(index) {
