@@ -1,0 +1,22 @@
+{
+  "name": "expenses-calculator",
+  "version": "0.0.0",
+  "homepage": "https://github.com/rodolfocaldeira/expenses-calculator",
+  "authors": [
+    "Rodolfo Caldeira <me@rodolfocaldeira.com>"
+  ],
+  "description": "A simple expenses calculator built using Angular.",
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "~1.3.14",
+    "angular-sanitize": "~1.3.14"
+  }
+}
