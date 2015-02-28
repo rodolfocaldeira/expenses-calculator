@@ -1,10 +1,8 @@
 /**
  * @fileoverview Angular directive that contains the logic for calling the
- * Google Feedback api.
+ * expenses list.
  */
-
-window.app = window.app || {};
-window.app.expenses = window.app.expeneses || {};
+ns('app.expenses');
 
 /**
  * Name that the directive will be registered with.
@@ -21,9 +19,9 @@ app.expenses.expensesDirective = function() {
     scope: {},
 
     link: function(scope, element, attrs) {
-     scope.clicky = function() {
-       console.log('Hello World');
-     }
+      scope.clicky = function() {
+        console.log('Hello World');
+      }
     },
     templateUrl: 'js/components/expenses/expenses.html'
   };
@@ -33,5 +31,30 @@ app.expenses.expensesDirective = function() {
  * Defines the 'expenses' module, which exports the expenses directive.
  * @type {!angular.Module}
  */
-app.expenses.module = angular.module('app.expenses', []).directive(
-    app.expenses.EXPENSES_DIRECTIVE_NAME, app.expenses.expensesDirective);
+app.expenses.module = angular.module('app.expenses', []).
+    directive(app.expenses.EXPENSES_DIRECTIVE_NAME, app.expenses.expensesDirective).
+    filter('expenseFilter', function($filter) {
+      return function(expense) {
+
+        var currencyFilter = $filter('currency');
+        var amount = currencyFilter(expense.amount, "€");
+
+        if (expense.operation === '=') {
+          return '<div class="total">' +
+              '<span class="description">' + expense.description + '</span> '
+              + '<span class="amount">' + amount + '</span>'
+              + '</div>';
+        }
+
+        if (expense.operation === '/') {
+          return '<div class="split">' +
+              '<span class="description">' + expense.description + '</span> '
+              + '<span class="amount">' + amount + '</span>'
+              + '</div>';
+        }
+
+        return '<span class="description">' + expense.description + '</span> '
+            + '<span class="amount">' + amount + '</span>';
+      }
+    });
+
