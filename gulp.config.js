@@ -36,7 +36,7 @@ var config = {
       //standAlone: true,
       // if standAlone is true you have to explicit tell your application that
       // it is a dependency
-      root: 'js/'
+      root: '/js/'
     }
   },
 
