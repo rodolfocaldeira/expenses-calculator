@@ -13,7 +13,6 @@ gulp.task('help', function() {
   plugins.taskListing();
 });
 
-
 /** STYLES ********************************************************************/
 
 gulp.task('styles', ['clean-styles'], function() {
@@ -26,7 +25,7 @@ gulp.task('styles', ['clean-styles'], function() {
         browsers: ['last 2 Chrome versions']
       }))
       .pipe(gulp.dest(config.css))
-  //.pipe(plugins.connect.reload());
+      .pipe(plugins.connect.reload());
 });
 
 gulp.task('clean-styles', function(done) {
@@ -34,10 +33,17 @@ gulp.task('clean-styles', function(done) {
   clean(config.css + '*.css', done);
 });
 
+gulp.task('reload-html', function () {
+  gulp.src(config.client + '**/*.html').pipe(plugins.connect.reload());
+});
+
+gulp.task('reload-js', function () {
+  gulp.src(config.client + '**/*.html').pipe(plugins.connect.reload());
+});
 
 /** SERVER ********************************************************************/
 
-//['wiredep', ]
+  //['wiredep', ]
 gulp.task('server', ['open-browser'], function() {
   log('Starting the server');
   return plugins.connect.server({
@@ -51,6 +57,14 @@ gulp.task('open-browser', function() {
   open('http://' + config.devServer + ':' + config.devPort);
 });
 
+/** WATCH *********************************************************************/
+
+gulp.task('watch', ['server'], function() {
+  log('Watching for changes...');
+  gulp.watch(config.client + 'css/*.less', ['styles']);
+  gulp.watch(config.client + '**/*.html', ['reload-html']);
+  gulp.watch(config.client + '**/*.js', ['reload-js']);
+});
 
 /**
  * Cleans the given system path.
