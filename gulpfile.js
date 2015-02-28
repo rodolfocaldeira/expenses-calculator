@@ -2,6 +2,7 @@
 
 var config = require('./gulp.config');
 var gulp = require('gulp');
+var args = require('yargs').argv;
 var plugins = require('gulp-load-plugins')({lazy: true});
 var del = require('del');
 var http = require('http');
@@ -11,6 +12,24 @@ gulp.task('default', ['help']);
 
 gulp.task('help', function() {
   plugins.taskListing();
+});
+
+/** STYLEGUIDE ****************************************************************/
+
+gulp.task('lint', function() {
+
+  log('Analyzing source with JSHint and JSCS');
+
+  // return gulp.src([
+  //     './src/**/*.js',
+  //     './*.js'
+  // ])
+  return gulp.src(config.js)
+      .pipe(plugins.if(args.verbose, plugins.print()))
+      //.pipe(plugins.jscs())
+      .pipe(plugins.jshint())
+      .pipe(plugins.jshint.reporter('jshint-stylish', {verbose: true}))
+      //.pipe(plugins.jshint.reporter('fail'));
 });
 
 /** STYLES ********************************************************************/

@@ -12,5 +12,7 @@ ns('ec.expenses');
  * @type {!angular.Module}
  */
 ec.expenses.module = angular.module('ec.expenses', []).
-    directive(ec.expenses.EXPENSES_DIRECTIVE_NAME, ec.expenses.expensesDirective).
-    directive(ec.expenses.EXPENSE_LINE_DIRECTIVE_NAME, ec.expenses.expenseLineDirective);
+    directive(ec.expenses.EXPENSES_DIRECTIVE_NAME,
+      ec.expenses.expensesDirective).
+    directive(ec.expenses.EXPENSE_LINE_DIRECTIVE_NAME,
+      ec.expenses.expenseLineDirective);

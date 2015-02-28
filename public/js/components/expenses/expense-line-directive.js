@@ -28,7 +28,7 @@ ec.expenses.expenseLineDirective = function() {
         if(operation === '=') {
           return 'total';
         } else if(operation === '/') {
-          return 'split'
+          return 'split';
         }
         return 'description';
       };

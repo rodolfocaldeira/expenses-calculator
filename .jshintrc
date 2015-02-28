@@ -1,0 +1,32 @@
+// Default settings for more options go to http://jshint.com/docs/options/
+{
+  "predef": [
+    "angular",            // Angular
+    "ns",                 // Simple Namespace
+    "ec"                  // Application
+  ],
+  "bitwise"      : true,  // Prohibit bitwise operators (&, |, ^, etc.).
+  "camelcase"    : false, // Require all variables to be in camelCase.
+  "curly"        : true,  // Require {} for every new block or scope.
+  "eqeqeq"       : false, // Require triple equals i.e. `===`.
+  "forin"        : true,  // Tolerate `for in` loops without `hasOwnPrototype`.
+  "immed"        : true,  // Require immediate invocations to be wrapped in parens e.g. `( function(){}() );`
+  "latedef"      : true,  // Prohibit variable use before definition.
+  "newcap"       : true,  // Require capitalization of all constructor functions e.g. `new F()`.
+  "noarg"        : true,  // Prohibit use of `arguments.caller` and `arguments.callee`.
+  "noempty"      : true,  // Prohibit use of empty blocks.
+  "nonew"        : true,  // Prohibit use of constructors for side-effects.
+  "plusplus"     : false, // Prohibit use of `++` & `--`.
+  "quotmark"     : true,  // Enforces consistent quotes in a file.
+  "regexp"       : true,  // Prohibit `.` and `[^...]` in regular expressions.
+  "undef"        : true,  // Require all non-global variables be declared before they are used.
+  "unused"       : true,  // Warns when you define but never use a variable.
+  "strict"       : true,  // Require `use strict` pragma in every file.
+  "trailing"     : true,  // Prohibit trailing whitespaces.
+  "maxlen"       : 80,    // Set the maximum line length.
+  "maxcomplexity": 10,    // Check all functions to be less than this cyclomatic complexity.
+  "indent"       : 2,
+  "globalstrict" : true, // Suppress warnings about the global strict declaration.
+  "browser"      : true,  // Predefine the normal browser variables.
+  "jquery"       : true   // Predefines jQuery variables.
+}
