@@ -8,10 +8,20 @@ ec.main.MainCtrl = function($scope) {
 };
 var MainCtrl = ec.main.MainCtrl;
 
+/**
+ *
+ * @param index
+ */
 MainCtrl.prototype.removeItem = function(index) {
   this.scope_.expenses.splice(index, 1);
 };
 
+/**
+ *
+ * @param amount
+ * @param operation
+ * @returns {number}
+ */
 MainCtrl.prototype.getPositiveOrNegativeAmount = function(amount, operation) {
   if (operation === '+') {
     return +amount;
@@ -19,6 +29,10 @@ MainCtrl.prototype.getPositiveOrNegativeAmount = function(amount, operation) {
   return -amount;
 };
 
+/**
+ *
+ * @returns {number}
+ */
 MainCtrl.prototype.calculateTotal = function() {
   var self = this;
   var total = 0;
@@ -41,6 +55,10 @@ MainCtrl.prototype.calculateTotal = function() {
   return total;
 };
 
+/**
+ *
+ * @param item
+ */
 MainCtrl.prototype.addItem = function(item) {
 
   var regex = /(\+|\-|\/|\*|=|x)?\s?(\d*\.?\d+)?(.*)/;

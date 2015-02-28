@@ -1,12 +1,6 @@
 <div class="container">
   <h1>Expenses Calculator</h1>
-  <ul class="expenses">
-    <li class="expense clearfix"
-        ng-repeat="expense in expenses"
-        ng-click="mainCtrl.removeItem($index)">
-      <ec-expense-line expense="expense"></ec-expense-line>
-    </li>
-  </ul>
+  <ec-expenses expenses="expenses" remove="mainCtrl.removeItem(index)"></ec-expenses>
   <form ng-submit="mainCtrl.addItem(item)">
     <input type="text"
            ng-model="item"

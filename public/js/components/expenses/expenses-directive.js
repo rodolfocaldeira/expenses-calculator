@@ -19,13 +19,15 @@ ec.expenses.EXPENSES_DIRECTIVE_NAME = 'ecExpenses';
  */
 ec.expenses.expensesDirective = function() {
   return {
-    scope: {},
-
+    scope: {
+      expenses: '=',
+      remove: '&'
+    },
     link: function(scope, element, attrs) {
       scope.clicky = function() {
         console.log('Hello World');
       }
     },
-    templateUrl: 'js/components/expenses/expenses.html'
+    templateUrl: 'js/components/expenses/expenses-directive.html'
   };
 };

@@ -1,0 +1,7 @@
+<ul class="expenses">
+  <li class="expense clearfix"
+      ng-repeat="expense in expenses"
+      ng-click="remove({index: $index})">
+    <ec-expense-line expense="expense"></ec-expense-line>
+  </li>
+</ul>
