@@ -4,7 +4,7 @@
     <li class="expense clearfix"
         ng-repeat="expense in expenses"
         ng-click="mainCtrl.removeItem($index)">
-      <ec-expense-item expense="expense"></ec-expense-item>
+      <ec-expense-line expense="expense"></ec-expense-line>
     </li>
   </ul>
   <form ng-submit="mainCtrl.addItem(item)">

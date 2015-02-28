@@ -31,7 +31,7 @@ ec.expenses.expensesDirective = function() {
 };
 
 
-ec.expenses.expensesItem = function() {
+ec.expenses.expenseLine = function() {
   return {
     scope: {
       expense: '='
@@ -46,7 +46,7 @@ ec.expenses.expensesItem = function() {
         return 'description';
       };
     },
-    templateUrl: 'js/components/expenses/expense-item.html'
+    templateUrl: 'js/components/expenses/expense-line.html'
   };
 };
 
@@ -56,4 +56,4 @@ ec.expenses.expensesItem = function() {
  */
 ec.expenses.module = angular.module('app.expenses', []).
     directive(ec.expenses.EXPENSES_DIRECTIVE_NAME, ec.expenses.expensesDirective).
-    directive('ecExpenseItem', ec.expenses.expensesItem);
+    directive('ecExpenseLine', ec.expenses.expenseLine);
