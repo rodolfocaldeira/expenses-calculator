@@ -14,7 +14,6 @@ ns('ec.expenses');
  */
 ec.expenses.EXPENSE_LINE_DIRECTIVE_NAME = 'ecExpenseLine';
 
-
 /**
  * @return {angular.Directive} Directive definition object.
  */
@@ -25,9 +24,9 @@ ec.expenses.expenseLineDirective = function() {
     },
     link: function(scope, element, attrs) {
       scope.getOperationStyle = function(operation) {
-        if(operation === '=') {
+        if (operation === '=') {
           return 'total';
-        } else if(operation === '/') {
+        } else if (operation === '/') {
           return 'split';
         }
         return 'description';

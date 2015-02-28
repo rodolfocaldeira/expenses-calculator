@@ -39,15 +39,13 @@ MainCtrl.prototype.calculateTotal = function() {
   var expense;
   var i;
   var len = self.scope_.expenses.length;
-  for(i = 0; i < len; i++) {
+  for (i = 0; i < len; i++) {
     expense = self.scope_.expenses[i];
     if (expense.operation === '+' || expense.operation === '-') {
       total += expense.amount;
-    }
-    else if (expense.operation === '*') {
+    } else if (expense.operation === '*') {
       total = total * expense.times;
-    }
-    else if (expense.operation === '/') {
+    } else if (expense.operation === '/') {
       total = total / expense.split;
     }
   }

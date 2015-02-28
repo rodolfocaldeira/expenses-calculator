@@ -20,7 +20,7 @@
   "quotmark"     : true,  // Enforces consistent quotes in a file.
   "regexp"       : true,  // Prohibit `.` and `[^...]` in regular expressions.
   "undef"        : true,  // Require all non-global variables be declared before they are used.
-  "unused"       : true,  // Warns when you define but never use a variable.
+  "unused"       : false,  // Warns when you define but never use a variable.
   "strict"       : true,  // Require `use strict` pragma in every file.
   "trailing"     : true,  // Prohibit trailing whitespaces.
   "maxlen"       : 80,    // Set the maximum line length.

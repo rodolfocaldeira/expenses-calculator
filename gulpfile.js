@@ -26,10 +26,10 @@ gulp.task('lint', function() {
   // ])
   return gulp.src(config.js)
       .pipe(plugins.if(args.verbose, plugins.print()))
-      //.pipe(plugins.jscs())
+      .pipe(plugins.jscs())
       .pipe(plugins.jshint())
       .pipe(plugins.jshint.reporter('jshint-stylish', {verbose: true}))
-      //.pipe(plugins.jshint.reporter('fail'));
+      .pipe(plugins.jshint.reporter('fail'));
 });
 
 /** STYLES ********************************************************************/
