@@ -141,10 +141,9 @@ gulp.task('optimize', ['images', 'templatecache', 'wiredep'], function() {
   var assets = plugins.useref.assets({
     searchPath: ['./', './public/']
   });
-  //var cssFilter = $.filter('**/*.css');
-  //var jsLibFilter = $.filter('**/'+ config.optimized.lib);
-  //var jsAppFilter = $.filter('**/' + config.optimized.app);
-
+  var cssFilter = plugins.filter('**/*.css');
+  var jsLibFilter = plugins.filter('**/'+ config.optimized.lib);
+  var jsAppFilter = plugins.filter('**/' + config.optimized.app);
   return gulp
       .src(config.indexHtml)
       .pipe(plugins.plumber())
@@ -152,20 +151,19 @@ gulp.task('optimize', ['images', 'templatecache', 'wiredep'], function() {
         starttag: '<!-- inject:templates:js -->'
       }))
       .pipe(assets)
-      //.pipe(cssFilter)
-      //.pipe($.csso())
-      //.pipe(cssFilter.restore())
-      //.pipe(jsLibFilter)
-      //.pipe($.uglify())
-      //.pipe(jsLibFilter.restore())
-      //.pipe(jsAppFilter)
-      //.pipe($.ngAnnotate())
-      //.pipe($.uglify())
-      //.pipe(jsAppFilter.restore())
+      .pipe(cssFilter)
+      .pipe(plugins.csso())
+      .pipe(cssFilter.restore())
+      .pipe(jsLibFilter)
+      .pipe(plugins.uglify())
+      .pipe(jsLibFilter.restore())
+      .pipe(jsAppFilter)
+      .pipe(plugins.ngAnnotate())
+      .pipe(plugins.uglify())
+      .pipe(jsAppFilter.restore())
       .pipe(assets.restore())
       .pipe(plugins.useref())
       .pipe(gulp.dest(config.dist));
-
 
 });
 

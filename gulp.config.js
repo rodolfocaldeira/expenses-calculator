@@ -40,7 +40,15 @@ var config = {
     }
   },
 
-  temp: temp
+  temp: temp,
+
+  /**
+   * Optimized files as defined in index.html
+   */
+  optimized: {
+    app: 'app.js',
+    lib: 'lib.js'
+  }
 
 
 
