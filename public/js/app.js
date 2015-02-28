@@ -1,8 +1,8 @@
 'use strict';
 
-ns('ecalc.application.module');
+ns('ec.application.module');
 
-ecalc.application.config = function($routeProvider) {
+ec.application.config = function($routeProvider) {
   $routeProvider.
       when('/', {
         templateUrl: 'js/main/main.html',
@@ -12,13 +12,14 @@ ecalc.application.config = function($routeProvider) {
       otherwise({redirectTo: '/'});
 };
 
-ecalc.application.module = angular.module('ecalcApp', [
+ec.application.module = angular.module('ecApp', [
   'ngRoute',
   'ngSanitize',
-  'app.expenses'
+  ec.expenses.module.name,
+  ec.footer.module.name
 ]);
 
-ecalc.application.module.config(ecalc.application.config);
+ec.application.module.config(ec.application.config);
 
 // register all controllers
-ecalc.application.module.controller('MainCtrl', ecalc.main.MainCtrl);
+ec.application.module.controller('MainCtrl', ec.main.MainCtrl);

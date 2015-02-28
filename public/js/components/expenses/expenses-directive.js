@@ -1,20 +1,23 @@
+'use strict';
+
 /**
  * @fileoverview Angular directive that contains the logic for calling the
  * expenses list.
  */
-ns('app.expenses');
+
+ns('ec.expenses');
 
 /**
  * Name that the directive will be registered with.
  * @export
  * @type {string}
  */
-app.expenses.EXPENSES_DIRECTIVE_NAME = 'rodiExpenses';
+ec.expenses.EXPENSES_DIRECTIVE_NAME = 'rodiExpenses';
 
 /**
  * @return {angular.Directive} Directive definition object.
  */
-app.expenses.expensesDirective = function() {
+ec.expenses.expensesDirective = function() {
   return {
     scope: {},
 
@@ -28,7 +31,7 @@ app.expenses.expensesDirective = function() {
 };
 
 
-app.expenses.expensesItem = function() {
+ec.expenses.expensesItem = function() {
   return {
     scope: {
       expense: '='
@@ -51,6 +54,6 @@ app.expenses.expensesItem = function() {
  * Defines the 'expenses' module, which exports the expenses directive.
  * @type {!angular.Module}
  */
-app.expenses.module = angular.module('app.expenses', []).
-    directive(app.expenses.EXPENSES_DIRECTIVE_NAME, app.expenses.expensesDirective).
-    directive('ecExpenseItem', app.expenses.expensesItem);
+ec.expenses.module = angular.module('app.expenses', []).
+    directive(ec.expenses.EXPENSES_DIRECTIVE_NAME, ec.expenses.expensesDirective).
+    directive('ecExpenseItem', ec.expenses.expensesItem);

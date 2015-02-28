@@ -1,10 +1,12 @@
-ns('ecalc.main.module');
+'use strict';
 
-ecalc.main.MainCtrl = function($scope) {
+ns('ec.main.module');
+
+ec.main.MainCtrl = function($scope) {
   this.scope_ = $scope;
   this.scope_.expenses = [];
 };
-var MainCtrl = ecalc.main.MainCtrl;
+var MainCtrl = ec.main.MainCtrl;
 
 MainCtrl.prototype.removeItem = function(index) {
   this.scope_.expenses.splice(index, 1);
