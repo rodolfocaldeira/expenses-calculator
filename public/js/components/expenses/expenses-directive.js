@@ -27,34 +27,30 @@ app.expenses.expensesDirective = function() {
   };
 };
 
+
+app.expenses.expensesItem = function() {
+  return {
+    scope: {
+      expense: '='
+    },
+    link: function(scope, element, attrs) {
+      scope.getOperationStyle = function(operation) {
+        if(operation === '=') {
+          return 'total';
+        } else if(operation === '/') {
+          return 'split'
+        }
+        return 'description';
+      };
+    },
+    templateUrl: 'js/components/expenses/expense-item.html'
+  };
+};
+
 /**
  * Defines the 'expenses' module, which exports the expenses directive.
  * @type {!angular.Module}
  */
 app.expenses.module = angular.module('app.expenses', []).
     directive(app.expenses.EXPENSES_DIRECTIVE_NAME, app.expenses.expensesDirective).
-    filter('expenseFilter', function($filter) {
-      return function(expense) {
-
-        var currencyFilter = $filter('currency');
-        var amount = currencyFilter(expense.amount, "€");
-
-        if (expense.operation === '=') {
-          return '<div class="total">' +
-              '<span class="description">' + expense.description + '</span> '
-              + '<span class="amount">' + amount + '</span>'
-              + '</div>';
-        }
-
-        if (expense.operation === '/') {
-          return '<div class="split">' +
-              '<span class="description">' + expense.description + '</span> '
-              + '<span class="amount">' + amount + '</span>'
-              + '</div>';
-        }
-
-        return '<span class="description">' + expense.description + '</span> '
-            + '<span class="amount">' + amount + '</span>';
-      }
-    });
-
+    directive('ecExpenseItem', app.expenses.expensesItem);

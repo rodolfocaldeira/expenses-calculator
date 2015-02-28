@@ -22,6 +22,3 @@ ecalc.application.module.config(ecalc.application.config);
 
 // register all controllers
 ecalc.application.module.controller('MainCtrl', ecalc.main.MainCtrl);
-
-
-
