@@ -2,7 +2,13 @@
 
 ns('ec.footer');
 
-ec.footer.DIRECTIVE_NAME = 'ecFooter';
+/**
+ * Name that the directive will be registered with.
+ * @export
+ * @type {string}
+ */
+ec.footer.FOOTER_DIRECTIVE_NAME = 'ecFooter';
+
 
 /**
  * @return {angular.Directive} Directive definition object.
@@ -14,9 +20,10 @@ ec.footer.footerDirective = function() {
   };
 };
 
+
 /**
  * Defines the 'footer' module, which exports the footer directive.
  * @type {!angular.Module}
  */
-ec.footer.module = angular.module('ecalc.footer', []).
-    directive(ec.footer.DIRECTIVE_NAME, ec.footer.footerDirective);
+ec.footer.module = angular.module('ec.footer', []).
+    directive(ec.footer.FOOTER_DIRECTIVE_NAME, ec.footer.footerDirective);

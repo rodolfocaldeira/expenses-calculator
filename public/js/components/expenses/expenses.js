@@ -1,14 +1,10 @@
 'use strict';
 
-/**
- * @fileoverview Angular directive that contains the logic for calling the
- * expenses list.
- */
-
 ns('ec.expenses');
 
 /**
- * Defines the 'expenses' module, which exports the expenses directive.
+ * Defines the 'expenses' module, which exports expenses and expense
+ * line directives.
  * @type {!angular.Module}
  */
 ec.expenses.module = angular.module('ec.expenses', []).

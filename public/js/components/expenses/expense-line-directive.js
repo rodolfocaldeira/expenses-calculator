@@ -1,11 +1,11 @@
 'use strict';
 
 /**
- * @fileoverview Angular directive that contains the logic for calling the
- * expenses list.
+ * @fileoverview Angular directive that contains the logic for expense line.
  */
 
 ns('ec.expenses');
+
 
 /**
  * Name that the directive will be registered with.
@@ -13,6 +13,7 @@ ns('ec.expenses');
  * @type {string}
  */
 ec.expenses.EXPENSE_LINE_DIRECTIVE_NAME = 'ecExpenseLine';
+
 
 /**
  * @return {angular.Directive} Directive definition object.

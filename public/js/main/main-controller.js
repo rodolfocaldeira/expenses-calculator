@@ -1,37 +1,55 @@
+/**
+ * @fileoverview The Main application controller.
+ */
+
 'use strict';
 
 ns('ec.main.module');
 
+
+/**
+ * Main application controller.
+ *
+ * @constructor
+ * @ngInject
+ * @export
+ */
 ec.main.MainCtrl = function($scope) {
+  /** @private {!angular.$scope} */
   this.scope_ = $scope;
+
+  /** @type {Array} */
   this.scope_.expenses = [];
 };
 var MainCtrl = ec.main.MainCtrl;
 
+
 /**
- *
- * @param index
+ * Removes the item in the given positon from the expenses array.
+ * @param {Number} index
  */
 MainCtrl.prototype.removeItem = function(index) {
   this.scope_.expenses.splice(index, 1);
 };
 
+
 /**
- *
- * @param amount
- * @param operation
- * @returns {number}
+ * Verifies the right amount to be returned based on the given operation.
+ * @param {Number} amount
+ * @param {String} operation
+ * @returns {number} The amount.
  */
-MainCtrl.prototype.getPositiveOrNegativeAmount = function(amount, operation) {
+MainCtrl.prototype.getPositiveOrNegativeAmount_ = function(amount, operation) {
   if (operation === '+') {
     return +amount;
   }
   return -amount;
 };
 
+
 /**
- *
- * @returns {number}
+ * Calculates the expenses total.
+ * @returns {number} The total.
  */
 MainCtrl.prototype.calculateTotal = function() {
   var self = this;
@@ -53,9 +71,18 @@ MainCtrl.prototype.calculateTotal = function() {
   return total;
 };
 
+
 /**
+ * Adds the item to expense list. The expense description and amount is
+ * extracted using a regular expression.
+ * Example of a valid items:
+ *   12 Noodles     = Noodles $12
+ *   50.25 Beers    = Beers $50.25
+ *   /2             = Split total by 2
+ *   *5             = Multiply total by 5
+ *   =              = Show Total
  *
- * @param item
+ * @param {String} item The item.
  */
 MainCtrl.prototype.addItem = function(item) {
 
@@ -106,7 +133,7 @@ MainCtrl.prototype.addItem = function(item) {
 
   self.scope_.expenses.push({
     operation: operation,
-    amount: self.getPositiveOrNegativeAmount(match[2], operation),
+    amount: self.getPositiveOrNegativeAmount_(match[2], operation),
     description: match[3] || ''
   });
 

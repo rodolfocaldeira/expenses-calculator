@@ -1,7 +1,17 @@
+/**
+ * @fileoverview Primary module for the Expenses Calculator app.
+ */
+
 'use strict';
 
 ns('ec.application.module');
 
+
+/**
+ * @param {!angular.$routeProvider} $routeProvider The Angular route provider
+ *     service.
+ * @ngInject
+ */
 ec.application.config = function($routeProvider) {
   $routeProvider.
       when('/', {
@@ -12,6 +22,11 @@ ec.application.config = function($routeProvider) {
       otherwise({redirectTo: '/'});
 };
 
+
+/**
+ * The main module for the Expenses Calculator app.
+ * @type {!angular.Module}
+ */
 ec.application.module = angular.module('ecApp', [
   'ngRoute',
   'ngSanitize',
