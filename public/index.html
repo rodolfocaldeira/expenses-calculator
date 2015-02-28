@@ -15,6 +15,11 @@
 
 <div class="container">
   <h1>Expenses Calculator</h1>
+
+  <!--&lt;!&ndash; DIRECTIVE &ndash;&gt;-->
+  <!--<expenses expenses="expenses"></expenses>-->
+
+
   <ul class="expenses">
     <li class="expense clearfix"
         ng-repeat="expense in expenses"
@@ -22,6 +27,7 @@
       <div ng-bind-html="expense | expenseFilter:$index"></div>
     </li>
   </ul>
+
   <form ng-submit="addItem(item)">
     <input type="text"
            ng-model="item"
