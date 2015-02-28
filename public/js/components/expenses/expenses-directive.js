@@ -23,11 +23,6 @@ ec.expenses.expensesDirective = function() {
       expenses: '=',
       remove: '&'
     },
-    link: function(scope, element, attrs) {
-      scope.clicky = function() {
-        console.log('Hello World');
-      }
-    },
     templateUrl: 'js/components/expenses/expenses-directive.html'
   };
 };
