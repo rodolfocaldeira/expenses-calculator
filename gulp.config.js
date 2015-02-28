@@ -5,11 +5,13 @@ var client = './public/';
 var config = {
   client: client,
   //clientNoLeadingDot: client.substring(1, client.length),
-  less: client + 'css/app.less',
-  css: client + 'css/'
 
-  //devServer: 'localhost',
-  //devPort: 8080,
+  less: client + 'css/app.less',
+  css: client + 'css/',
+
+  devServer: 'localhost',
+  devPort: 8080
+
   //bower: {
   //  json: require('./bower.json'),
   //  directory: client + 'bower_components'

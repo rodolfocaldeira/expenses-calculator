@@ -13,6 +13,9 @@ gulp.task('help', function() {
   plugins.taskListing();
 });
 
+
+/** STYLES ********************************************************************/
+
 gulp.task('styles', ['clean-styles'], function() {
   log('Compiling Less --> CSS');
   return gulp
@@ -30,6 +33,24 @@ gulp.task('clean-styles', function(done) {
   log('Cleaning Styles');
   clean(config.css + '*.css', done);
 });
+
+
+/** SERVER ********************************************************************/
+
+//['wiredep', ]
+gulp.task('server', ['open-browser'], function() {
+  log('Starting the server');
+  return plugins.connect.server({
+    root: [config.client],
+    livereload: true
+  });
+});
+
+gulp.task('open-browser', function() {
+  log('Opening the browser');
+  open('http://' + config.devServer + ':' + config.devPort);
+});
+
 
 /**
  * Cleans the given system path.
