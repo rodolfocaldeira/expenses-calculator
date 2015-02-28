@@ -30,13 +30,13 @@ var config = {
   templateCache: {
     file: 'templates.js',
     options: {
-      module: 'app.templates',
-      standAlone: true,
+      module: 'App',
+      standAlone: false,
       //module: 'app.templates',
       //standAlone: true,
       // if standAlone is true you have to explicit tell your application that
       // it is a dependency
-      root: '/js/'
+      root: 'js/'
     }
   },
 

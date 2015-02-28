@@ -66,6 +66,14 @@ gulp.task('server', ['wiredep', 'open-browser'], function() {
   });
 });
 
+gulp.task('server-dist', ['optimize', 'open-browser'], function() {
+  log('Starting the server');
+  return plugins.connect.server({
+    root: [config.dist],
+    livereload: false
+  });
+});
+
 /** WATCH *********************************************************************/
 
 gulp.task('reload-html', function () {
