@@ -1,4 +1,4 @@
-var app = angular.module('App', ['ngSanitize']);
+var app = angular.module('App', ['ngSanitize', 'app.expenses']);
 
 
 

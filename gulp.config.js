@@ -1,6 +1,7 @@
 'use strict';
 
 var client = './public/';
+var temp = './tmp/';
 
 var config = {
   client: client,
@@ -17,22 +18,40 @@ var config = {
     directory: client + 'bower_components'
   },
   js: [
-    //client + 'app/components/**/*.js',
-    //client + 'app/mainpage/**/*.js',
-    //client + 'app/config.js',
+    client + 'js/components/**/*.js',
     client + 'js/**/*.js'
     //'!' + client + '**/*.spec.js'
   ],
-  indexHtml: client + 'index.html'
+  indexHtml: client + 'index.html',
+
+  dist: './dist/',
+  images: client + 'img/**/*.*',
+  htmltemplates: client + 'js/**/*.html',
+  templateCache: {
+    file: 'templates.js',
+    options: {
+      module: 'app.templates',
+      standAlone: true,
+      //module: 'app.templates',
+      //standAlone: true,
+      // if standAlone is true you have to explicit tell your application that
+      // it is a dependency
+      root: 'js/'
+    }
+  },
+
+  temp: temp
+
+
+
 };
 
 config.getWiredepDefaultOptions = function() {
-  var options = {
+  return {
     bowerJson: config.bower.json,
     directory: config.bower.directory,
     ignorePath: config.bower.ignorePath
   };
-  return options;
 };
 
 module.exports = config;

@@ -15,6 +15,11 @@ gulp.task('help', function() {
 
 /** STYLES ********************************************************************/
 
+gulp.task('clean-styles', function(done) {
+  log('Cleaning Styles');
+  clean(config.css + '*.css', done);
+});
+
 gulp.task('styles', ['clean-styles'], function() {
   log('Compiling Less --> CSS');
   return gulp
@@ -28,28 +33,7 @@ gulp.task('styles', ['clean-styles'], function() {
       .pipe(plugins.connect.reload());
 });
 
-gulp.task('clean-styles', function(done) {
-  log('Cleaning Styles');
-  clean(config.css + '*.css', done);
-});
-
-gulp.task('reload-html', function () {
-  gulp.src(config.client + '**/*.html').pipe(plugins.connect.reload());
-});
-
-gulp.task('reload-js', function () {
-  gulp.src(config.client + '**/*.html').pipe(plugins.connect.reload());
-});
-
 /** SERVER ********************************************************************/
-
-gulp.task('server', ['wiredep', 'open-browser'], function() {
-  log('Starting the server');
-  return plugins.connect.server({
-    root: [config.client],
-    livereload: true
-  });
-});
 
 gulp.task('open-browser', function() {
   log('Opening the browser');
@@ -57,7 +41,7 @@ gulp.task('open-browser', function() {
 });
 
 
-gulp.task('wiredep', function() {
+gulp.task('wiredep', ['styles'], function() {
   log('Wire up the bower css js and our app js into the html');
   var options = config.getWiredepDefaultOptions();
   var wiredep = require('wiredep').stream;
@@ -74,7 +58,23 @@ gulp.task('wiredep', function() {
       .pipe(gulp.dest(config.client));
 });
 
+gulp.task('server', ['wiredep', 'open-browser'], function() {
+  log('Starting the server');
+  return plugins.connect.server({
+    root: [config.client],
+    livereload: true
+  });
+});
+
 /** WATCH *********************************************************************/
+
+gulp.task('reload-html', function () {
+  gulp.src(config.client + '**/*.html').pipe(plugins.connect.reload());
+});
+
+gulp.task('reload-js', function () {
+  gulp.src(config.client + '**/*.html').pipe(plugins.connect.reload());
+});
 
 gulp.task('watch', ['server'], function() {
   log('Watching for changes...');
@@ -82,6 +82,87 @@ gulp.task('watch', ['server'], function() {
   gulp.watch(config.client + '**/*.html', ['reload-html']);
   gulp.watch(config.client + '**/*.js', ['reload-js']);
 });
+
+
+/** DIST **********************************************************************/
+
+gulp.task('fonts', function() {
+  //log('Copying fonts');
+  //return gulp.src(config.fonts)
+  //  .pipe(gulp.dest(config.build + 'fonts'))
+});
+
+gulp.task('images', function() {
+  log('Copying the images');
+  return gulp.src(config.images).
+      //pipe(plugins.imagemin({optimizationLevel: 4})).
+      pipe(gulp.dest(config.dist + 'img'));
+});
+
+gulp.task('clean-code', function(done) {
+    var files = [].concat(
+        config.temp + '**/*.js',
+        config.dist + '**/*.html',
+        config.dist + 'js/**/*.js'
+    );
+    clean(files, done);
+});
+
+  gulp.task('clean', function(done) {
+  clean([config.temp, config.dist], done);
+});
+
+gulp.task('templatecache', ['clean-code'], function() {
+    log('Creating AngularJS $templateCache');
+    return gulp
+        .src(config.htmltemplates)
+        .pipe(plugins.minifyHtml({empty: true}))
+        .pipe(plugins.angularTemplatecache(
+            config.templateCache.file,
+            config.templateCache.options
+            ))
+        .pipe(gulp.dest(config.temp));
+});
+
+
+
+gulp.task('optimize', ['images', 'templatecache', 'wiredep'], function() {
+  log('Optimizing the javascript, css html');
+
+  var templateCache = config.temp + config.templateCache.file;
+  //var assets = $.useref.assets({searchPath: './'});
+  //var cssFilter = $.filter('**/*.css');
+  //var jsLibFilter = $.filter('**/'+ config.optimized.lib);
+  //var jsAppFilter = $.filter('**/' + config.optimized.app);
+
+  return gulp
+      .src(config.indexHtml)
+      .pipe(plugins.plumber())
+      .pipe(plugins.inject(gulp.src(templateCache, {read: false}), {
+        starttag: '<!-- inject:templates:js -->'
+      }))
+      //.pipe(assets)
+      //.pipe(cssFilter)
+      //.pipe($.csso())
+      //.pipe(cssFilter.restore())
+      //.pipe(jsLibFilter)
+      //.pipe($.uglify())
+      //.pipe(jsLibFilter.restore())
+      //.pipe(jsAppFilter)
+      //.pipe($.ngAnnotate())
+      //.pipe($.uglify())
+      //.pipe(jsAppFilter.restore())
+      //.pipe(assets.restore())
+      //.pipe($.useref())
+      .pipe(gulp.dest(config.dist));
+
+
+});
+
+
+
+/** HELPER METHODS ************************************************************/
+
 
 /**
  * Cleans the given system path.
@@ -92,6 +173,7 @@ function clean(path, done) {
   log('Cleaning ' + plugins.util.colors.blue(path));
   del(path, done);
 }
+
 
 /**
  * Logs a message to the standard output.
