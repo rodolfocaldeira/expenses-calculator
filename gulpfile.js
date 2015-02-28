@@ -43,8 +43,7 @@ gulp.task('reload-js', function () {
 
 /** SERVER ********************************************************************/
 
-  //['wiredep', ]
-gulp.task('server', ['open-browser'], function() {
+gulp.task('server', ['wiredep', 'open-browser'], function() {
   log('Starting the server');
   return plugins.connect.server({
     root: [config.client],
@@ -55,6 +54,24 @@ gulp.task('server', ['open-browser'], function() {
 gulp.task('open-browser', function() {
   log('Opening the browser');
   open('http://' + config.devServer + ':' + config.devPort);
+});
+
+
+gulp.task('wiredep', function() {
+  log('Wire up the bower css js and our app js into the html');
+  var options = config.getWiredepDefaultOptions();
+  var wiredep = require('wiredep').stream;
+  var injectSrc = config.js.slice(0);
+  injectSrc.push(config.css + '*.css');
+
+  return gulp
+      .src(config.indexHtml)
+      .pipe(wiredep(options))
+      .pipe(plugins.inject(gulp.src(injectSrc), {
+        read: false,
+        ignorePath: config.clientNoLeadingDot
+      }))
+      .pipe(gulp.dest(config.client));
 });
 
 /** WATCH *********************************************************************/
