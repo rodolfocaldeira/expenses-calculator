@@ -1,5 +1,5 @@
 <!doctype html>
-<html ng-app='App'>
+<html ng-app="ecalcApp">
 <head>
   <meta charset=utf-8>
   <title>Expenses Calculator</title>
@@ -17,45 +17,53 @@
   <!-- endbuild -->
 
 </head>
-<body ng-controller="ExpensesCalculatorCtrl">
+<body>
 
-<div class="container">
-  <h1>Expenses Calculator</h1>
+<!-- ng-controller="ExpensesCalculatorCtrl" -->
 
-  <ul class="expenses">
-    <li class="expense clearfix"
-        ng-repeat="expense in expenses"
-        ng-click="removeItem($index)">
-      <div ng-bind-html="expense | expenseFilter:$index"></div>
-    </li>
-  </ul>
+<!--<div class="container">-->
+  <!--<h1>Expenses Calculator</h1>-->
 
-  <form ng-submit="addItem(item)">
-    <input type="text"
-           ng-model="item"
-           placeholder="15.50 Noodles"
-           autofocus="autofocus"/>
-  </form>
-</div>
-<footer>
-  <p>Built with <a href="http://angularjs.org/">AngularJs</a>, source code
-    available on
-    <a href="https://github.com/rodolfocaldeira/expenses-calculator">GitHub</a>.
-  </p>
-  <div rodi-expenses></div>
-</footer>
+  <!--<ul class="expenses">-->
+    <!--<li class="expense clearfix"-->
+        <!--ng-repeat="expense in expenses"-->
+        <!--ng-click="removeItem($index)">-->
+      <!--<div ng-bind-html="expense | expenseFilter:$index"></div>-->
+    <!--</li>-->
+  <!--</ul>-->
+
+  <!--<form ng-submit="addItem(item)">-->
+    <!--<input type="text"-->
+           <!--ng-model="item"-->
+           <!--placeholder="15.50 Noodles"-->
+           <!--autofocus="autofocus"/>-->
+  <!--</form>-->
+<!--</div>-->
+<!--<footer>-->
+  <!--<p>Built with <a href="http://angularjs.org/">AngularJs</a>, source code-->
+    <!--available on-->
+    <!--<a href="https://github.com/rodolfocaldeira/expenses-calculator">GitHub</a>.-->
+  <!--</p>-->
+  <!--<div rodi-expenses></div>-->
+<!--</footer>-->
+
+
+<div data-ng-view></div>
 
 
 <!-- build:js js/lib.js -->
 <!-- bower:js -->
 <script src="bower_components/angular/angular.js"></script>
 <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+<script src="bower_components/simple-namespace/lib/index.js"></script>
+<script src="bower_components/angular-route/angular-route.js"></script>
 <!-- endbower -->
 <!-- endbuild -->
 
 <!-- build:js js/app.js -->
 <!-- inject:js -->
 <script src="/js/components/expenses/expenses-directive.js"></script>
+<script src="/js/main/main-controller.js"></script>
 <script src="/js/app.js"></script>
 <!-- endinject -->
 

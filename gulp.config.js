@@ -19,6 +19,7 @@ var config = {
   },
   js: [
     client + 'js/components/**/*.js',
+    client + 'js/main/**/*.js',
     client + 'js/**/*.js'
     //'!' + client + '**/*.spec.js'
   ],

@@ -1,0 +1,37 @@
+{
+  "name": "simple-namespace",
+  "version": "0.2.1",
+  "homepage": "https://github.com/drzax/simple-namespace",
+  "authors": [
+    "Simon Elvery <simon@elvery.net>"
+  ],
+  "description": "An easy (and almost-too-simple) method for generating a 'namespace'.",
+  "main": "lib/index.js",
+  "moduleType": [
+    "amd",
+    "globals",
+    "node"
+  ],
+  "keywords": [
+    "namespace"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests",
+    "Gruntfile.js"
+  ],
+  "_release": "0.2.1",
+  "_resolution": {
+    "type": "version",
+    "tag": "0.2.1",
+    "commit": "854120c75319fc3f80feee91c5508b572e0742c5"
+  },
+  "_source": "git://github.com/drzax/simple-namespace.git",
+  "_target": "~0.2.1",
+  "_originalSource": "simple-namespace",
+  "_direct": true
+}
