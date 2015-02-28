@@ -103,7 +103,7 @@ gulp.task('fonts', function() {
 gulp.task('images', function() {
   log('Copying the images');
   return gulp.src(config.images).
-      //pipe(plugins.imagemin({optimizationLevel: 4})).
+      pipe(plugins.imagemin({optimizationLevel: 4})).
       pipe(gulp.dest(config.dist + 'img'));
 });
 
