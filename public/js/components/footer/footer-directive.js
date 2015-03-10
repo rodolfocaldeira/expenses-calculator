@@ -2,6 +2,7 @@
 
 ns('ec.footer');
 
+
 /**
  * Name that the directive will be registered with.
  * @export

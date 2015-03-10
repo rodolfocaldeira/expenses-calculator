@@ -7,6 +7,7 @@ var plugins = require('gulp-load-plugins')({lazy: true});
 var del = require('del');
 var http = require('http');
 var open = require("open");
+//var gjslint = require('gulp-gjslint');
 
 gulp.task('default', ['help']);
 
@@ -20,10 +21,6 @@ gulp.task('lint', function() {
 
   log('Analyzing source with JSHint and JSCS');
 
-  // return gulp.src([
-  //     './src/**/*.js',
-  //     './*.js'
-  // ])
   return gulp.src(config.js)
       .pipe(plugins.if(args.verbose, plugins.print()))
       .pipe(plugins.jscs())
@@ -31,6 +28,28 @@ gulp.task('lint', function() {
       .pipe(plugins.jshint.reporter('jshint-stylish', {verbose: true}))
       .pipe(plugins.jshint.reporter('fail'));
 });
+
+gulp.task('gjslint', function() {
+
+  log('Analyzing source with Google Closure lint');
+  return gulp.src(config.js)
+      .pipe(plugins.gjslint({
+        flags: [
+          '--jslint_error=blank_lines_at_top_level',
+          '--jslint_error=well_formed_author',
+          '--jslint_error=no_braces_around_inherit_doc',
+          '--jslint_error=braces_around_type',
+          '--jslint_error=optional_type_marker',
+          '--jslint_error=variable_arg_marker',
+          '--jslint_error=unused_private_members',
+          '--jslint_error=unused_local_variables',
+        ]
+      }))
+      .pipe(plugins.gjslint.reporter('console'));
+
+});
+
+
 
 /** STYLES ********************************************************************/
 

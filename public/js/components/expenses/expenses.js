@@ -2,6 +2,7 @@
 
 ns('ec.expenses');
 
+
 /**
  * Defines the 'expenses' module, which exports expenses and expense
  * line directives.

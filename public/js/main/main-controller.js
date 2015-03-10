@@ -7,11 +7,11 @@
 ns('ec.main.module');
 
 
+
 /**
  * Main application controller.
- *
+ * @param {!angular.$scope} $scope Angular scope
  * @constructor
- * @ngInject
  * @export
  */
 ec.main.MainCtrl = function($scope) {
@@ -38,6 +38,7 @@ MainCtrl.prototype.removeItem = function(index) {
  * @param {Number} amount
  * @param {String} operation
  * @return {number} The amount.
+ * @private
  */
 MainCtrl.prototype.getPositiveOrNegativeAmount_ = function(amount, operation) {
   if (operation === '+') {
