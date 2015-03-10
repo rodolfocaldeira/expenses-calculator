@@ -37,7 +37,7 @@ MainCtrl.prototype.removeItem = function(index) {
  * Verifies the right amount to be returned based on the given operation.
  * @param {Number} amount
  * @param {String} operation
- * @returns {number} The amount.
+ * @return {number} The amount.
  */
 MainCtrl.prototype.getPositiveOrNegativeAmount_ = function(amount, operation) {
   if (operation === '+') {
@@ -49,7 +49,7 @@ MainCtrl.prototype.getPositiveOrNegativeAmount_ = function(amount, operation) {
 
 /**
  * Calculates the expenses total.
- * @returns {number} The total.
+ * @return {number} The total.
  */
 MainCtrl.prototype.calculateTotal = function() {
   var self = this;
