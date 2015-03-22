@@ -21,7 +21,8 @@ ec.expenses.EXPENSE_LINE_DIRECTIVE_NAME = 'ecExpenseLine';
 ec.expenses.expenseLineDirective = function() {
   return {
     scope: {
-      expense: '='
+      expense: '=',
+      remove: '&'
     },
     link: function(scope, element, attrs) {
       scope.getOperationStyle = function(operation) {

@@ -104,7 +104,7 @@ gulp.task('server', ['wiredep', 'open-browser'], function() {
   });
 });
 
-gulp.task('server-dist', ['optimize', 'open-browser'], function() {
+gulp.task('server-dist', ['open-browser'], function() {
   log('Starting the server');
   return plugins.connect.server({
     root: [config.dist],
@@ -196,7 +196,10 @@ gulp.task('optimize', ['images', 'templatecache', 'wiredep'], function() {
       .pipe(plugins.uglify())
       .pipe(jsLibFilter.restore())
       .pipe(jsAppFilter)
-      .pipe(plugins.ngAnnotate())
+      .pipe(plugins.ngAnnotate({
+        add: true,
+        single_quotes: true
+      }))
       .pipe(plugins.uglify())
       .pipe(jsAppFilter.restore())
       .pipe(assets.restore())

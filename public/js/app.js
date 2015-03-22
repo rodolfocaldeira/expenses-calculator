@@ -21,6 +21,7 @@ ec.application.config = function($routeProvider) {
       }).
       otherwise({redirectTo: '/'});
 };
+//ec.application.config.$inject = ['$routeProvider'];
 
 
 /**

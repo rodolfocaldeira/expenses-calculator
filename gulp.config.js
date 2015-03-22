@@ -20,8 +20,8 @@ var config = {
   js: [
     client + 'js/components/**/*.js',
     client + 'js/main/**/*.js',
-    client + 'js/**/*.js'
-    //'!' + client + '**/*.spec.js'
+    client + 'js/**/*.js',
+    '!' + client + '**/*_test.js'
   ],
   indexHtml: client + 'index.html',
 
@@ -31,7 +31,7 @@ var config = {
   templateCache: {
     file: 'templates.js',
     options: {
-      module: 'App',
+      module: 'ecApp',
       standAlone: false,
       //module: 'app.templates',
       //standAlone: true,

@@ -45,7 +45,10 @@
     "karma": "^0.12.31",
     "karma-chrome-launcher": "^0.1.7",
     "karma-jasmine": "^0.3.5",
+    "karma-ng-html2js-preprocessor": "^0.1.2",
+    "karma-sinon": "^1.0.4",
     "open": "0.0.5",
+    "sinon": "^1.14.1",
     "wiredep": "^2.2.2",
     "yargs": "^3.4.4"
   }

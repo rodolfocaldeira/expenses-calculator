@@ -13,6 +13,7 @@ ns('ec.main.module');
  * @param {!angular.$scope} $scope Angular scope
  * @constructor
  * @export
+ * @ngInject
  */
 ec.main.MainCtrl = function($scope) {
   /** @private {!angular.$scope} */
@@ -21,6 +22,7 @@ ec.main.MainCtrl = function($scope) {
   /** @type {Array} */
   this.scope_.expenses = [];
 };
+//ec.main.MainCtrl.$inject = ["$scope"];
 var MainCtrl = ec.main.MainCtrl;
 
 
